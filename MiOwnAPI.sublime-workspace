@@ -69,28 +69,37 @@
 	},
 	"expanded_folders":
 	[
-		"/C/xampp/htdocs/MyOwnAPI"
+		"/C/xampp/htdocs/MyOwnAPI",
+		"/C/xampp/htdocs/MyOwnAPI/app",
+		"/C/xampp/htdocs/MyOwnAPI/app/Http",
+		"/C/xampp/htdocs/MyOwnAPI/database",
+		"/C/xampp/htdocs/MyOwnAPI/database/migrations"
 	],
 	"file_history":
 	[
+		"/C/xampp/htdocs/MyOwnAPI/app/Vehicle.php",
+		"/C/Users/admin/Desktop/welcome.blade.php",
+		"/C/xampp/htdocs/MyOwnAPI/app/Maker.php",
+		"/C/xampp/htdocs/MyOwnAPI/database/migrations/2017_04_22_101550_vehicles_table.php",
+		"/C/xampp/htdocs/MyOwnAPI/database/migrations/2017_04_22_101602_makers_table.php",
+		"/C/Users/admin/Downloads/Compressed/myownapi-master/myownapi-master/database/migrations/2015_01_31_220602_vehicles_table.php",
+		"/C/Users/admin/Downloads/Compressed/myownapi-master/myownapi-master/database/migrations/2015_01_31_220507_makers_table.php",
+		"/C/xampp/htdocs/MyOwnAPI/.env",
+		"/C/Users/admin/Downloads/Compressed/myownapi-master/myownapi-master/app/Vehicle.php",
+		"/C/Users/admin/Downloads/Compressed/myownapi-master/myownapi-master/app/Maker.php",
 		"/C/xampp/htdocs/MyOwnAPI/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php",
 		"/C/xampp/htdocs/MyOwnAPI/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php",
 		"/C/xampp/htdocs/MyOwnAPI/app/Http/routes.php",
 		"/C/xampp/htdocs/MyOwnAPI/resources/views/hi.blade.php",
 		"/C/xampp/htdocs/MyOwnAPI/app/Http/Controllers/MyController.php",
-		"/C/xampp/htdocs/MyOwnAPI/app/Maker.php",
 		"/C/xampp/htdocs/MyOwnAPI/database/seeds/VehiclesSeed.php",
 		"/C/xampp/htdocs/MyOwnAPI/database/seeds/MakerSeed.php",
 		"/C/xampp/htdocs/MyOwnAPI/database/seeds/DatabaseSeeder.php",
 		"/C/xampp/htdocs/MyOwnAPI/database/migrations/2017_04_22_080828_vehicles_table.php",
 		"/C/xampp/htdocs/MyOwnAPI/database/migrations/2017_04_22_080702_maker_table.php",
-		"/C/xampp/htdocs/MyOwnAPI/.env",
-		"/C/xampp/htdocs/MyOwnAPI/app/Vehicle.php",
 		"/C/xampp/htdocs/MyOwnAPI/app/MyModel.php",
 		"/C/Users/admin/Downloads/Compressed/myownapi-master/myownapi-master/database/seeds/VehiclesSeed.php",
 		"/C/Users/admin/Downloads/Compressed/myownapi-master/myownapi-master/database/seeds/DatabaseSeeder.php",
-		"/C/Users/admin/Downloads/Compressed/myownapi-master/myownapi-master/app/Vehicle.php",
-		"/C/Users/admin/Downloads/Compressed/myownapi-master/myownapi-master/app/Maker.php",
 		"/C/xampp/htdocs/MyOwnAPI/resources/hi.blade.php",
 		"/C/Users/admin/Downloads/Compressed/myownapi-master/myownapi-master/app/User.php",
 		"/C/Users/admin/Downloads/Compressed/myownapi-master/myownapi-master/app/File.php",
@@ -195,12 +204,7 @@
 		"/C/xampp/htdocs/pranav/design/themes/responsive/templates/views/products/components/quick_view_link.tpl",
 		"/C/xampp/htdocs/pranav/design/backend/templates/common/subheader.tpl",
 		"/C/xampp/htdocs/pranav/design/backend/templates/common/check_items.tpl",
-		"/C/xampp/htdocs/pranav/design/backend/templates/views/usergroups/update.tpl",
-		"/C/xampp/htdocs/pranav/design/backend/templates/views/usergroups/requests.tpl",
-		"/C/xampp/htdocs/pranav/design/backend/templates/views/usergroups/manage.tpl",
-		"/C/xampp/htdocs/pranav/design/backend/templates/pickers/users/picker_contents.tpl",
-		"/C/xampp/htdocs/pranav/design/backend/templates/common/select_usergroups.tpl",
-		"/C/xampp/htdocs/pranav/design/backend/templates/views/products/update.tpl"
+		"/C/xampp/htdocs/pranav/design/backend/templates/views/usergroups/update.tpl"
 	],
 	"find":
 	{
@@ -442,7 +446,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 283.0,
+	"side_bar_width": 353.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
