@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\Maker;
 use App\User;
 
-class UsersSeed extends Seeder 
-{
+class UsersSeed extends Seeder
+ {
 
 	/**
 	 * Run the database seeds.
@@ -18,8 +18,8 @@ class UsersSeed extends Seeder
 	{
 		User::create
 		([
-			'email'=>'fake@fake.com',
-			'password'=>Hash::make('pass')
+			'email' => 'fake@fake.com',
+			'password' => Hash::make('pass')
 		]);
 	}
 

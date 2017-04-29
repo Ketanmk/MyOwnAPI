@@ -18,9 +18,7 @@ class VehicleController extends Controller {
 	{
 		$vehicles = Vehicle::all();
 
-		return response()->json(['data'=> $vehicles], 200);
+		return response()->json(['data' => $vehicles], 200);
 	}
+
 }
-
-
-	

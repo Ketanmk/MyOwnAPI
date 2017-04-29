@@ -14,11 +14,11 @@ class MakerVehiclesController extends Controller {
 
 	public function __construct()
 	{
-		$this->middleware('auth.basic.once', ['except' => ['index','show']]);
+		$this->middleware('oauth', ['except' => ['index', 'show']]);
 	}
 
 	/**
-	 * Display a listing of the resource. 
+	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
@@ -28,12 +28,11 @@ class MakerVehiclesController extends Controller {
 
 		if(!$maker)
 		{
-			return response()->json(['message'=> 'This maker does not exist', 'code' => 404], 404);
+			return response()->json(['message' => 'This maker does not exist', 'code' => 404], 404);
 		}
 
-		return response()->json(['data'=> $maker->vehicles], 200);
+		return response()->json(['data' => $maker->vehicles], 200);
 	}
-
 
 	/**
 	 * Store a newly created resource in storage.
@@ -46,15 +45,14 @@ class MakerVehiclesController extends Controller {
 
 		if(!$maker)
 		{
-			return response()->json(['message'=> 'This maker does not exist', 'code' => 404], 404);
+			return response()->json(['message' => 'This maker does not exist', 'code' => 404], 404);
 		}
 
 		$values = $request->all();
 
-		$maker->vehicles()->create($values);
+		$vehicle = $maker->vehicles()->create($values);
 
-		return response()->json(['message'=> 'This vehicle associated was created'], 201);
-
+		return response()->json(['message' => "The vehicle associated was created with serie: {$vehicle->serie}"], 201);
 	}
 
 	/**
@@ -63,18 +61,24 @@ class MakerVehiclesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id, $vehicleID)
+	public function show($id, $vehicleId)
 	{
 		$maker = Maker::find($id);
 
 		if(!$maker)
 		{
-			return response()->json(['message'=> 'This maker does not exist', 'code' => 404], 404);
+			return response()->json(['message' => 'This maker does not exist', 'code' => 404], 404);
 		}
 
-		return response()->json(['data'=> $maker->vehicles->find($vehicleID)], 200);	}
+		$vehicle = $maker->vehicles->find($vehicleId);
 
+		if(!$vehicle)
+		{
+			return response()->json(['message' => 'This vehicle does not exist for this maker', 'code' => 404], 404);
+		}
 
+		return response()->json(['data' => $vehicle], 200);
+	}
 
 	/**
 	 * Update the specified resource in storage.
@@ -88,15 +92,16 @@ class MakerVehiclesController extends Controller {
 
 		if(!$maker)
 		{
-			return response()->Json(['message'=> 'This maker does not exist', 'code' => 404], 404);
+			return response()->json(['message' => 'This maker does not exist', 'code' => 404], 404);
 		}
 
 		$vehicle = $maker->vehicles->find($vehicleId);
 
 		if(!$vehicle)
 		{
-			return response()->Json(['message'=> 'This vehicle does not exist', 'code' => 404], 404);
+			return response()->json(['message' => 'This vehicle does not exist', 'code' => 404], 404);
 		}
+
 
 		$color = $request->get('color');
 		$power = $request->get('power');
@@ -105,14 +110,12 @@ class MakerVehiclesController extends Controller {
 
 		$vehicle->color = $color;
 		$vehicle->power = $power;
-		$vehicle->capacity = $capacity;
+		$vehicle->capacity = $capacity;	
 		$vehicle->speed = $speed;
-
 
 		$vehicle->save();
 
-		return response()->Json(['message'=> 'The vehicle has been updated'], 200);
-
+		return response()->json(['message' => 'The vehicle has been updated'], 200);
 	}
 
 	/**
@@ -127,20 +130,19 @@ class MakerVehiclesController extends Controller {
 
 		if(!$maker)
 		{
-			return response()->Json(['message'=> 'This maker does not exist', 'code' => 404], 404);
+			return response()->json(['message' => 'This maker does not exist', 'code' => 404], 404);
 		}
 
 		$vehicle = $maker->vehicles->find($vehicleId);
 
 		if(!$vehicle)
 		{
-			return response()->Json(['message'=> 'This vehicle does not exist', 'code' => 404], 404);
+			return response()->json(['message' => 'This vehicle does not exist', 'code' => 404], 404);
 		}
 
 		$vehicle->delete();
 
-		return response()->Json(['message'=> 'The vehicle has been deleted'], 200);
-
+		return response()->json(['message' => 'The vehicle has been deleted'], 200);
 	}
 
 }

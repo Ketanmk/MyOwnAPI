@@ -4,8 +4,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 use App\Maker;
+use App\Vehicle;
 
 use App\Http\Requests\CreateMakerRequest;
 
@@ -13,7 +15,7 @@ class MakerController extends Controller {
 
 	public function __construct()
 	{
-		$this->middleware('auth.basic.once', ['except' => ['index','show']]);
+		$this->middleware('oauth', ['except' => ['index', 'show']]);
 	}
 
 	/**
@@ -23,11 +25,13 @@ class MakerController extends Controller {
 	 */
 	public function index()
 	{
-		$makers = Maker::all();
+		$makers = Cache::remember('makers', 15/60, function()
+			{
+				return Maker::simplePaginate(15);
+			});
 
-		return response()->Json(['data'=> $makers], 200);
+		return response()->json(['next' => $makers->nextPageUrl(), 'previous' => $makers->previousPageUrl(), 'data' => $makers->items()], 200);
 	}
-
 
 	/**
 	 * Store a newly created resource in storage.
@@ -37,10 +41,10 @@ class MakerController extends Controller {
 	public function store(CreateMakerRequest $request)
 	{
 		$values = $request->only(['name', 'phone']);
-		
-		Maker::create($values);
 
-		return response()->Json(['message' => 'Maker correctly added'], 201);
+		$maker = Maker::create($values);
+
+		return response()->json(['message' => "Maker correctly added with id: {$maker->id}"], 201);
 	}
 
 	/**
@@ -55,12 +59,11 @@ class MakerController extends Controller {
 
 		if(!$maker)
 		{
-			return response()->Json(['message'=> 'This maker does nto exist', 'code' => 404], 404);
+			return response()->json(['message' => 'This maker does not exist', 'code' => 404], 404);
 		}
 
-		return response()->Json(['data'=> $maker], 200);
+		return response()->json(['data' => $maker], 200);
 	}
-
 
 	/**
 	 * Update the specified resource in storage.
@@ -74,7 +77,7 @@ class MakerController extends Controller {
 
 		if(!$maker)
 		{
-			return response()->Json(['message'=> 'This maker does nto exist', 'code' => 404], 404);
+			return response()->json(['message' => 'This maker does not exist', 'code' => 404], 404);
 		}
 
 		$name = $request->get('name');
@@ -85,7 +88,7 @@ class MakerController extends Controller {
 
 		$maker->save();
 
-		return response()->Json(['message'=> 'The maker has been updated'], 200);
+		return response()->json(['message' => 'The maker has been updated'], 200);
 	}
 
 	/**
@@ -96,23 +99,23 @@ class MakerController extends Controller {
 	 */
 	public function destroy($id)
 	{
-				$maker = Maker::find($id);
+		$maker = Maker::find($id);
 
 		if(!$maker)
 		{
-			return response()->Json(['message'=> 'This maker does nto exist', 'code' => 404], 404);
-		}	
-		
-		$vehicle = $maker->vehicles;
+			return response()->json(['message' => 'This maker does not exist', 'code' => 404], 404);
+		}
 
-		if (sizeof($vehicle) > 0)
+		$vehicles = $maker->vehicles;
+
+		if(sizeof($vehicles) > 0)
 		{
-			return response()->Json(['message'=> 'This maker have associated vehicle. Delete his vehicle first.', 'code' => 409], 409);
+			return response()->json(['message' => 'This maker have associeted vehicles. Delete his vehicles first.', 'code' => 409], 409);
 		}
 
 		$maker->delete();
 
-		return response()->Json(['message'=> 'The maker has been deleted'], 200);
+		return response()->json(['message' => 'The maker has been deleted'], 200);
 	}
 
 }

@@ -23,7 +23,7 @@ class OnceAuth implements Middleware {
 	{
 		$this->auth = $auth;
 	}
- 
+
 	/**
 	 * Handle an incoming request.
 	 *
